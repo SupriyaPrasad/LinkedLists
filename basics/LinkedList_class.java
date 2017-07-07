@@ -2,22 +2,29 @@ package LinkedList;
 
 import java.util.Random;
 
+
 public class LinkedList_class {
-	public int data;
-	public LinkedList_class next;
+	 int data;
+	 LinkedList_class next;
+	 LinkedList_class start;
 	
-	public static void insert_atStart(int num,LinkedList_class start){
+	public  void insert_atStart(int num){
 		LinkedList_class temp=start;
 		LinkedList_class node= new LinkedList_class();
 		temp.next=node;
 		node.data=num;
 		
 	}
-	public void insert_atEnd(int num, LinkedList_class start){
-		LinkedList_class temp=start;
+	public LinkedList_class insert_atEnd(int num){
+		
 		if(start==null){
-			System.out.println("list is empty");
-		}else{
+			LinkedList_class node= new LinkedList_class();
+			node.data=num;
+			node.next=null;
+			start=node;
+		}
+		else{
+			LinkedList_class temp=start;
 			while(temp.next!=null){
 				temp=temp.next;
 			}
@@ -25,10 +32,11 @@ public class LinkedList_class {
 			temp.next=node;
 			node.data=num;
 		}
+		return start;
 	}
 	
-	public void display(LinkedList_class start){
-		LinkedList_class temp=start.next;
+	public void display(){
+		LinkedList_class temp=start;
 			while(temp!=null){
 				System.out.print(temp.data);
 				temp=temp.next;
@@ -36,8 +44,8 @@ public class LinkedList_class {
 		System.out.println();
 	}
 	
-	public int length(LinkedList_class start){
-		LinkedList_class temp=start.next;
+	public int length(){
+		LinkedList_class temp=start;
 		int size=0;
 		while(temp!=null){
 			size++;
@@ -46,8 +54,8 @@ public class LinkedList_class {
 		return size;
 	}
 	
-	public void print_alternate(LinkedList_class start){
-		LinkedList_class temp=start.next;
+	public void print_alternate(){
+		LinkedList_class temp=start;
 		while(temp!=null){
 			System.out.print(temp.data);
 			if(temp.next!=null && temp.next.next!=null){
@@ -60,8 +68,8 @@ public class LinkedList_class {
 		System.out.println();
 	}
 	
-	public int print_middle_number(int length,LinkedList_class start){
-		LinkedList_class temp=start.next;
+	public int print_middle_number(int length){
+		LinkedList_class temp=start;
 		int mid=length/2;
 		for(int i=0;i<mid;i++){
 			temp=temp.next;
@@ -69,8 +77,8 @@ public class LinkedList_class {
 		return temp.data;
 	}
 	
-	public void removeAll_from_last(LinkedList_class start){//need to check
-		LinkedList_class temp=start.next;
+	public void removeAll_from_last(){//need to check
+		LinkedList_class temp=start;
 		while(temp!=null){
 			temp=start.next;
 			while(temp.next.next!=null ){
@@ -81,7 +89,7 @@ public class LinkedList_class {
 			}
 		}
 	
-	public void reverse_list(LinkedList_class start){
+	public void reverse_list(){
 		LinkedList_class prev = new LinkedList_class();
 		LinkedList_class temp=start;
 		
@@ -101,23 +109,22 @@ public class LinkedList_class {
 				temp.next=prev;
 				temp=prev;	
 		}
-		System.out.println();
-		temp=null;
-		
+		System.out.println(start.data);
+		temp=null;	
 	}
 	
-	public boolean check_palindrome(LinkedList_class start){
-		 int length=start.length(start);
+	public boolean check_palindrome(){
+		 LinkedList_class temp=start;
+		 int length=length();
 		 int mid=length/2;
 		 boolean b= false;
-		 LinkedList_class temp=start.next;
-		 for(int i=0;i<(length-2);i++){
+		 temp=start;
+		 for(int i=0;i<length-2;i++){
 			 temp=temp.next;
 		 }
-		 
 		 LinkedList_class prev=temp;
 		 LinkedList_class last_val=temp.next;
-		 temp=start.next;
+		 temp=start;
 		 for(int i=0;i<mid;i++){
 			 if(temp.data==last_val.data){
 				 b=true;
@@ -134,28 +141,25 @@ public class LinkedList_class {
 				 
 			 }
 		 }
-		 
-		 
 		 return b;
 	}
 	
-	public static void addition(LinkedList_class l1, LinkedList_class l2){
+	public static void addition(LinkedList_class p1, LinkedList_class p2){
 		LinkedList_class add_list = new LinkedList_class();
 		LinkedList_class head=add_list;
 		LinkedList_class cur=head;
-		LinkedList_class h1=l1.next;
-		LinkedList_class h2=l2.next;
-		
-		while(h1!=null || h2!=null){	
+		LinkedList_class h1=p1;
+		LinkedList_class h2=p2;
+		while(h1!=null || h2!=null){
 			int sum=h1.data+h2.data;
-			add_list.insert_atEnd(sum,cur);
+			cur= add_list.insert_atEnd(sum);
 			h1=h1.next;
 			h2=h2.next;	
 			cur=cur.next;	
 		}
 		cur=head;
 		
-		add_list.reverse_list(cur);
+		add_list.reverse_list();
 	}
 	
 	
@@ -173,47 +177,47 @@ public class LinkedList_class {
 		
 		LinkedList_class l3= new LinkedList_class();
 		for(int i=0;i<count;i++){
-			l3.insert_atEnd(i,l3);
+			l3.insert_atEnd(i);
 		}
-		l3.print_alternate(l3);
-		
-		//display elements in LL
-		l3.display(l3);
+		//display elements in LL and display alternate numbers
+		l3.display();
+		l3.print_alternate();
 		
 		// Length and middle number
 		
-		/*int len=l3.length(l3);
+		int len=l3.length();
 		System.out.println("length is "+len);
-		System.out.println("middle number is "+l3.print_middle_number(len,l3));
-		l3.reverse_list(l3);*/
+		System.out.println("middle number is "+l3.print_middle_number(len));
+		l3.reverse_list();
 		
 		
 		//Test Palindrome
 		
-		/*LinkedList_class l1= new LinkedList_class();
+		LinkedList_class k1= new LinkedList_class();
 		 
-		    l1.insert_atEnd(1,l1);
-			l1.insert_atEnd(2,l1);
-			l1.insert_atEnd(3,l1);
-			l1.insert_atEnd(3,l1);
-			l1.insert_atEnd(2,l1);
-			l1.insert_atEnd(1,l1);
-			//l1.insert_atEnd(1,l1);
-			System.out.println("Palindrome? "+l1.check_palindrome(l1));
-		*/
+			k1.insert_atEnd(1);
+			k1.insert_atEnd(2);
+			k1.insert_atEnd(3);
+			k1.insert_atEnd(3);
+			k1.insert_atEnd(2);
+			k1.insert_atEnd(1);
+			
+			System.out.println("k1 Palindrome? "+k1.check_palindrome());
 		
+			
 		// Reverse Addition
 		
-	/*	LinkedList_class l1= new LinkedList_class();
+		LinkedList_class l1= new LinkedList_class();
 		LinkedList_class l2= new LinkedList_class();
-		l1.insert_atEnd(0,l1);
-		l1.insert_atEnd(0,l1);
-		l1.insert_atEnd(1,l1);
-		
-		l2.insert_atEnd(0,l2);
-		l2.insert_atEnd(0,l2);
-		l2.insert_atEnd(2,l2);
-		addition(l1,l2);*/
+		l1.insert_atEnd(9);
+		l1.insert_atEnd(0);
+		LinkedList_class head1= l1.insert_atEnd(1);
+		l1.display();
+		l2.insert_atEnd(9);
+		l2.insert_atEnd(0);
+		LinkedList_class head2 = l2.insert_atEnd(2);
+		l2.display();
+		addition(head1,head2);
 		
 	}
 
